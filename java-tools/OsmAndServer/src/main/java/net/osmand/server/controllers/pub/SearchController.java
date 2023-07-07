@@ -86,7 +86,9 @@ public class SearchController {
     @RequestMapping(path = {"/search-poi"}, produces = "application/json")
     @ResponseBody
     public ResponseEntity<String> searchPoi(@RequestBody SearchService.PoiSearchData searchData) throws IOException {
+        long time = System.currentTimeMillis();
         SearchService.PoiSearchResult poiSearchResult = searchService.searchPoi(searchData);
+        LOGGER.info("searchPoi time " + (System.currentTimeMillis() - time) + " ms");
         return ResponseEntity.ok(gson.toJson(poiSearchResult));
     }
     

@@ -830,7 +830,9 @@ public class OsmAndMapsService {
 	
 	public List<File> filterMapsByName(List<File> filesToUse, List<LatLon> bbox) throws IOException {
 		List<File> res = new ArrayList<>();
+		long time = System.currentTimeMillis();
 		HashSet<String> regions = getRegionsNameByBbox(bbox);
+		LOGGER.info("getRegionsNameByBbox time " + (System.currentTimeMillis() - time) + " ms");
 		for (File f : filesToUse) {
 			OsmAndMapsService.BinaryMapIndexReaderReference ref = obfFiles.get(f.getAbsolutePath());
 			String name = ref.file.getName().toLowerCase().replace("_2.obf", "");
